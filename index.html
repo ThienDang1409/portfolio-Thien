@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đặng Minh Thiện — Full-Stack Web Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0f14;
+      --surface: #161a22;
+      --surface2: #1e2330;
+      --border: rgba(255,255,255,0.07);
+      --border2: rgba(255,255,255,0.12);
+      --text: #e8eaf0;
+      --muted: #7a8094;
+      --accent: #4f9cf9;
+      --accent2: #38d9a9;
+      --accent3: #f7961e;
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Layout ── */
+    .portfolio {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 60px 28px 100px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 36px;
+      align-items: start;
+      padding-bottom: 52px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 60px;
+    }
+
+    .hero-tag {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-tag::before {
+      content: '';
+      display: inline-block;
+      width: 22px;
+      height: 1px;
+      background: var(--accent2);
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 6.5vw, 62px);
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -0.025em;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .hero-name span { color: var(--accent); }
+
+    .hero-role {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .hero-bio {
+      font-size: 15px;
+      color: #9ba3ba;
+      line-height: 1.8;
+      max-width: 500px;
+      margin-bottom: 30px;
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .hero-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 16px;
+      border: 1px solid var(--border2);
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      transition: border-color 0.18s, color 0.18s;
+    }
+
+    .hero-link:hover { border-color: var(--accent); color: var(--accent); }
+    .hero-link svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    .avatar {
+      width: 92px;
+      height: 92px;
+      border-radius: 14px;
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -1px;
+      flex-shrink: 0;
+    }
+
+    /* ── Section ── */
+    .section { margin-bottom: 60px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffffff;
+      white-space: nowrap;
+    }
+
+    .section-line { flex: 1; height: 1px; background: var(--border); }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* ── Skills ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .skill-group {
+      background: var(--surface);
+      padding: 22px 24px;
+    }
+
+    .skill-group-title {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 14px;
+    }
+
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+
+    .tag {
+      font-size: 12.5px;
+      font-weight: 400;
+      color: #c4cade;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 5px;
+    }
+
+    .tag.hot {
+      color: var(--accent);
+      border-color: rgba(79,156,249,0.28);
+      background: rgba(79,156,249,0.07);
+    }
+
+    .tag.new {
+      color: var(--accent2);
+      border-color: rgba(56,217,169,0.28);
+      background: rgba(56,217,169,0.07);
+    }
+
+    /* ── Timeline ── */
+    .timeline {
+      position: relative;
+      padding-left: 22px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: var(--border2);
+    }
+
+    .tl-item {
+      position: relative;
+      margin-bottom: 34px;
+    }
+
+    .tl-item:last-child { margin-bottom: 0; }
+
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -26px;
+      top: 7px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px var(--bg);
+    }
+
+    .tl-period {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 4px;
+      letter-spacing: 0.03em;
+    }
+
+    .tl-title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 3px;
+    }
+
+    .tl-company {
+      font-size: 13.5px;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .tl-desc {
+      font-size: 14px;
+      color: #9ba3ba;
+      line-height: 1.75;
+    }
+
+    .tl-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+
+    /* ── Projects ── */
+    .projects-grid { display: grid; gap: 16px; }
+
+    .proj-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 26px;
+      transition: border-color 0.18s;
+    }
+
+    .proj-card:hover { border-color: var(--border2); }
+
+    .proj-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .proj-name {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .proj-period {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+
+    .proj-desc {
+      font-size: 14px;
+      color: #9ba3ba;
+      line-height: 1.75;
+      margin-bottom: 14px;
+    }
+
+    .proj-footer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .proj-link {
+      font-size: 12.5px;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      opacity: 0.85;
+      transition: opacity 0.15s;
+    }
+
+    .proj-link:hover { opacity: 1; }
+    .proj-link svg { width: 13px; height: 13px; }
+
+    /* ── Badges ── */
+    .badge {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 5px;
+    }
+
+    .badge-blue {
+      background: rgba(79,156,249,0.1);
+      color: var(--accent);
+      border: 1px solid rgba(79,156,249,0.22);
+    }
+
+    .badge-green {
+      background: rgba(56,217,169,0.1);
+      color: var(--accent2);
+      border: 1px solid rgba(56,217,169,0.22);
+    }
+
+    .badge-orange {
+      background: rgba(247,150,30,0.1);
+      color: var(--accent3);
+      border: 1px solid rgba(247,150,30,0.22);
+    }
+
+    /* ── Education / Certs ── */
+    .cards-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 24px;
+    }
+
+    .info-card-title {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 5px;
+      line-height: 1.4;
+    }
+
+    .info-card-sub {
+      font-size: 13px;
+      color: var(--accent2);
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .info-card-meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 80px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-name {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 620px) {
+      .hero { grid-template-columns: 1fr; }
+      .avatar { order: -1; width: 68px; height: 68px; font-size: 20px; }
+      .cards-row { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .proj-top { flex-direction: column; gap: 4px; }
+    }
+
+    @media (max-width: 400px) {
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="portfolio">
+
+  <!-- ── Hero ── -->
+  <div class="hero">
+    <div>
+      <div class="hero-tag">Available for opportunities</div>
+      <h1 class="hero-name">Đặng Minh<br><span>Thiện</span></h1>
+      <div class="hero-role">Full-Stack Web Developer</div>
+      <p class="hero-bio">
+        Passionate about building performant, scalable web applications — from clean React UIs to robust Node.js / NestJS backends with PostgreSQL and Supabase. Based in Dong Nai, Vietnam.
+      </p>
+      <div class="hero-links">
+        <a class="hero-link" href="mailto:minhthien12149@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m2 7 10 7 10-7"/>
+          </svg>
+          minhthien12149@gmail.com
+        </a>
+        <a class="hero-link" href="tel:0337607583">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.05 1.1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/>
+          </svg>
+          0337 607 583
+        </a>
+        <a class="hero-link" href="https://github.com/ThienDang1409" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+   
+  </div>
+
+  <!-- ── Skills ── -->
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">Skills</h2>
+      <div class="section-line"></div>
+      <div class="section-label">Tech stack</div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Frontend</div>
+        <div class="skill-tags">
+          <span class="tag hot">ReactJS</span>
+          <span class="tag">HTML / CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Bootstrap 5</span>
+          <span class="tag">Material UI</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Backend</div>
+        <div class="skill-tags">
+          <span class="tag hot">Node.js</span>
+          <span class="tag new">NestJS</span>
+          <span class="tag">Express.js</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">Django</span>
+          <span class="tag">Java</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Database</div>
+        <div class="skill-tags">
+          <span class="tag new">PostgreSQL</span>
+          <span class="tag new">Supabase</span>
+          <span class="tag">MongoDB</span>
+          <span class="tag">MySQL</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">DevOps & Tools</div>
+        <div class="skill-tags">
+          <span class="tag new">CI/CD</span>
+          <span class="tag">Docker</span>
+          <span class="tag">GitHub Actions</span>
+          <span class="tag">Git</span>
+          <span class="tag">JWT</span>
+          <span class="tag">Cloudinary</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Experience ── -->
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">Experience</h2>
+      <div class="section-line"></div>
+      <div class="section-label">Work history</div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-period">Oct 2024 – Jan 2025</div>
+        <div class="tl-title">Backend Developer Intern</div>
+        <div class="tl-company">TMA Solutions</div>
+        <div class="tl-desc">
+          Completed internship at one of Vietnam's leading software outsourcing companies. Developed and maintained RESTful APIs, wrote unit tests, and collaborated in an Agile team environment. Gained hands-on experience with enterprise-grade Node.js / NestJS backend architecture, relational database design with PostgreSQL, Supabase integration, and CI/CD pipeline setup using GitHub Actions and Docker.
+        </div>
+        <div class="tl-tags">
+          <span class="tag hot">Node.js</span>
+          <span class="tag new">NestJS</span>
+          <span class="tag new">PostgreSQL</span>
+          <span class="tag new">Supabase</span>
+          <span class="tag">Docker</span>
+          <span class="tag new">CI/CD</span>
+          <span class="tag">REST API</span>
+          <span class="tag">GitHub Actions</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Projects ── -->
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">Projects</h2>
+      <div class="section-line"></div>
+      <div class="section-label">Selected work</div>
+    </div>
+    <div class="projects-grid">
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-name">TOEIC Testing Platform</div>
+          <div class="proj-period">Nov 2024 – Mar 2025</div>
+        </div>
+        <p class="proj-desc">
+          A full-featured TOEIC practice and real-test platform. Supports multiple test modes, real-time grading, detailed statistics tracking, and a rich admin dashboard built with Django. Backend deployed on Windows Server 2012 with JWT authentication, CKEditor for content management, and Cloudinary for media storage.
+        </p>
+        <div class="tl-tags" style="margin-bottom: 14px;">
+          <span class="tag hot">ReactJS</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">Django</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">JWT</span>
+          <span class="tag">Bootstrap 5</span>
+          <span class="tag">Cloudinary</span>
+        </div>
+        <div class="proj-footer">
+          <span class="badge badge-blue">Team of 2</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-name">Fruitopia — E-commerce Platform v2</div>
+          <div class="proj-period">Sep – Dec 2024</div>
+        </div>
+        <p class="proj-desc">
+          Agricultural products e-commerce app with full shopping flow, blog system, promotions engine, store location map, order & delivery tracking, admin dashboard, and an AI chatbot powered by GPT-4 for product recommendations and customer support.
+        </p>
+        <div class="tl-tags" style="margin-bottom: 14px;">
+          <span class="tag hot">ReactJS</span>
+          <span class="tag">Express.js</span>
+          <span class="tag">MongoDB</span>
+          <span class="tag">GPT-4</span>
+          <span class="tag">Cloudinary</span>
+          <span class="tag">JWT</span>
+          <span class="tag">Material UI</span>
+        </div>
+        <div class="proj-footer">
+          <a class="proj-link" href="https://github.com/ThienDang1409/Fruitopia_Website" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+            View on GitHub
+          </a>
+          <span class="badge badge-green">Team of 2</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-name">Fruitopia — Original (v1)</div>
+          <div class="proj-period">Apr – May 2023</div>
+        </div>
+        <p class="proj-desc">
+          Solo-built fruit selling website as a self-study project. Implemented full CRUD, shopping cart, checkout flow, and admin panel using Java Servlet and JSP — a solid foundation in MVC web architecture from scratch.
+        </p>
+        <div class="tl-tags" style="margin-bottom: 14px;">
+          <span class="tag">HTML / CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Java (Servlet)</span>
+          <span class="tag">JSP</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">Bootstrap 5</span>
+        </div>
+        <div class="proj-footer">
+          <a class="proj-link" href="https://github.com/ThienDang1409/web_fruitopia/tree/main/Final_Project" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+            View on GitHub
+          </a>
+          <span class="badge badge-orange">Solo project</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Education & Certifications ── -->
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">Education & Certifications</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="cards-row">
+      <div class="info-card">
+        <div class="info-card-title">Ho Chi Minh City University of Technology and Education</div>
+        <div class="info-card-sub">B.Eng. Information Technology</div>
+        <div class="info-card-meta">Software Technology · 2021 – 2025</div>
+        <span class="badge badge-blue">GPA 3.34 / 4.0</span>
+      </div>
+      <div class="info-card">
+        <div class="info-card-title">TOEIC Certificate</div>
+        <div class="info-card-sub">Score: 635</div>
+        <div class="info-card-meta">Issued May 2024</div>
+        <span class="badge badge-green">English proficiency</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Footer ── -->
+  <div class="footer">
+    <div class="footer-name">Đặng Minh Thiện</div>
+    <div class="footer-copy">© 2026 · Full-Stack Web Developer · Dong Nai, Vietnam</div>
+  </div>
+
+</div>
+
+</body>
+</html>
